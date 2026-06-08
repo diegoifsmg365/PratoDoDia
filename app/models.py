@@ -73,11 +73,11 @@ class CardapioSemanal(models.Model):
 # RF03 - Gerenciar refeições do cardápio
 class Refeicao(models.Model):
     pratoPrincipal = models.CharField(max_length=200, verbose_name="Prato principal")
-    opcaoVegetariana = models.CharField(max_length=200, verbose_name="Opção vegetariana")
-    acompanhamento = models.CharField(max_length=200, verbose_name="Acompanhamento")
-    salada = models.CharField(max_length=200, verbose_name="Salada")
-    sobremesa = models.CharField(max_length=200, verbose_name="Sobremesa")
-    suco = models.CharField(max_length=100, verbose_name="Suco")
+    opcaoVegetariana = models.CharField(max_length=200, blank=True, null=True, verbose_name="Opção vegetariana")
+    acompanhamento = models.CharField(max_length=200, blank=True, null=True, verbose_name="Acompanhamento")
+    salada = models.CharField(max_length=200, blank=True, null=True, verbose_name="Salada")
+    sobremesa = models.CharField(max_length=200, blank=True, null=True, verbose_name="Sobremesa")
+    suco = models.CharField(max_length=100, blank=True, null=True, verbose_name="Suco")
     diaSemana = models.ForeignKey(DiaSemana, on_delete=models.CASCADE, verbose_name="Dia da semana")
     tipoRefeicao = models.ForeignKey(TipoRefeicao, on_delete=models.CASCADE, verbose_name="Tipo de refeição")
     cardapioSemanal = models.ForeignKey(CardapioSemanal, on_delete=models.CASCADE, verbose_name="Cardápio semanal")
