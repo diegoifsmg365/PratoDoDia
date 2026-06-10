@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refeições</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <a class="navbar-brand" href="/">Prato do Dia</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/cardapio-dia/">Cardápio do Dia</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/cardapio-semanal/">Cardápio Semanal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/refeicoes/">Refeições</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/avaliacoes/">Avaliações</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/sugestoes/">Sugestões</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/avisos/">Avisos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/admin/">Administração</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Refeições</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Dia</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Prato Principal</th>
+                    <th scope="col">Opção Vegetariana</th>
+                    <th scope="col">Acompanhamento</th>
+                    <th scope="col">Salada</th>
+                    <th scope="col">Sobremesa</th>
+                    <th scope="col">Suco</th>
+                    <th scope="col">Cardápio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for refeicao in refeicoes %}
+                <tr>
+                    <td>{{ refeicao.diaSemana }}</td>
+                    <td>{{ refeicao.tipoRefeicao }}</td>
+                    <td>{{ refeicao.pratoPrincipal }}</td>
+                    <td>{{ refeicao.opcaoVegetariana }}</td>
+                    <td>{{ refeicao.acompanhamento }}</td>
+                    <td>{{ refeicao.salada }}</td>
+                    <td>{{ refeicao.sobremesa }}</td>
+                    <td>{{ refeicao.suco }}</td>
+                    <td>{{ refeicao.cardapioSemanal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

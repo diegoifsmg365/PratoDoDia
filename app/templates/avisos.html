@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardápio Semanal</title>
+    <title>Avisos</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -43,21 +43,25 @@
     </nav>
 
     <div class="container mt-5">
-        <h2 class="mb-4">Cardápio Semanal</h2>
+        <h2 class="mb-4">Avisos</h2>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Data Início</th>
-                    <th scope="col">Data Fim</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Mensagem</th>
+                    <th scope="col">Publicação</th>
+                    <th scope="col">Expiração</th>
+                    <th scope="col">Usuário</th>
                 </tr>
             </thead>
             <tbody>
-                {% for cardapio in cardapios %}
+                {% for aviso in avisos %}
                 <tr>
-                    <td>{{ cardapio.dataInicio }}</td>
-                    <td>{{ cardapio.dataFim }}</td>
-                    <td>{{ cardapio.status }}</td>
+                    <td>{{ aviso.titulo }}</td>
+                    <td>{{ aviso.mensagem }}</td>
+                    <td>{{ aviso.dataPublicacao }}</td>
+                    <td>{{ aviso.dataExpiracao }}</td>
+                    <td>{{ aviso.usuario }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -23,7 +23,7 @@ class CardapioSemanalView(View):
 class RefeicoesView(View):
     def get(self, request, *args, **kwargs):
         refeicoes = Refeicao.objects.all()
-        return render(request, 'refeicao.html', {'refeicoes': refeicoes})
+        return render(request, 'refeicoes.html', {'refeicoes': refeicoes})
 
 
 class TipoRefeicaoView(View):
@@ -35,7 +35,7 @@ class TipoRefeicaoView(View):
 class AvaliacoesView(View):
     def get(self, request, *args, **kwargs):
         avaliacoes = Avaliacao.objects.all()
-        return render(request, 'avaliacao.html', {'avaliacoes': avaliacoes})
+        return render(request, 'avaliacoes.html', {'avaliacoes': avaliacoes})
 
 
 class DiaSemanaView(View):
@@ -47,7 +47,7 @@ class DiaSemanaView(View):
 class SugestoesView(View):
     def get(self, request, *args, **kwargs):
         sugestoes = Sugestao.objects.all()
-        return render(request, 'sugestao.html', {'sugestoes': sugestoes})
+        return render(request, 'sugestoes.html', {'sugestoes': sugestoes})
 
 
 class TipoUsuarioView(View):
@@ -59,28 +59,28 @@ class TipoUsuarioView(View):
 class AvisosView(View):
     def get(self, request, *args, **kwargs):
         avisos = Aviso.objects.all()
-        return render(request, 'aviso.html', {'avisos': avisos})
+        return render(request, 'avisos.html', {'avisos': avisos})
 
 
 class UsuariosView(View):
     def get(self, request, *args, **kwargs):
         usuarios = Usuario.objects.all()
-        return render(request, 'usuario.html', {'usuarios': usuarios})
+        return render(request, 'usuarios.html', {'usuarios': usuarios})
 
 
 class RestricoesAlimentaresView(View):
     def get(self, request, *args, **kwargs):
         restricoes = RestricaoAlimentar.objects.all()
-        return render(request, 'restricao_alimentar.html', {'restricoes': restricoes})
+        return render(request, 'restricoes.html', {'restricoes': restricoes})
 
 
 class FotosRefeicaoView(View):
     def get(self, request, *args, **kwargs):
         fotos = FotoRefeicao.objects.all()
-        return render(request, 'foto_refeicao.html', {'fotos': fotos})
+        return render(request, 'fotos.html', {'fotos': fotos})
 
 
 class MediaAvaliacaoView(View):
     def get(self, request, *args, **kwargs):
         medias = MediaAvaliacao.objects.all()
-        return render(request, 'media_avaliacao.html', {'medias': medias})
+        return render(request, 'medias.html', {'medias': medias})
