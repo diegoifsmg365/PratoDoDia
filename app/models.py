@@ -90,7 +90,7 @@ class Refeicao(models.Model):
         verbose_name_plural = "Refeições"
 
 
-# RF05 - Gerenciar avaliações dos alunos sobre as refeições
+# RF05 - Gerenciar avaliações sobre as refeições
 class Avaliacao(models.Model):
     nota = models.IntegerField(verbose_name="Nota da avaliação")
     comentario = models.TextField(verbose_name="Comentário da avaliação")
@@ -138,7 +138,7 @@ class Aviso(models.Model):
         verbose_name_plural = "Avisos"
 
 
-# RF010 - Gerenciar o cardápio do dia (visão simplificada)
+# RF010 - Gerenciar o cardápio do dia
 class CardapioDia(models.Model):
     data = models.DateField(verbose_name="Data do cardápio")
     refeicaoAlmoco = models.ForeignKey(Refeicao, on_delete=models.CASCADE, verbose_name="Refeição do almoço", related_name="cardapio_almoco")
@@ -152,7 +152,7 @@ class CardapioDia(models.Model):
         verbose_name_plural = "Cardápios do Dia"
 
 
-# RF011 - Gerenciar ingredientes ou restrições alimentares
+# RF011 - Gerenciar restrições alimentares
 class RestricaoAlimentar(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome da restrição")
     descricao = models.TextField(verbose_name="Descrição da restrição")

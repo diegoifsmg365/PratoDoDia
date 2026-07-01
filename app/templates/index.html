@@ -3,56 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
-    <!-- Incluindo Bootstrap CSS -->
+    <title>Prato do Dia - Home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-        <a class="navbar-brand" href="/">Prato do Dia</a>
+        <a class="navbar-brand" href="/home/">Prato do Dia</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/cardapio-dia/">Cardápio do Dia</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/cardapio-semanal/">Cardápio Semanal</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/refeicoes/">Refeições</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/avaliacoes/">Avaliações</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/sugestoes/">Sugestões</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/avisos/">Avisos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/usuarios/">Usuários</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/admin/">Administração</a>
-                </li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/home/">Home</a></li>
+                {% if perfil == 'nutricionista' %}
+                <li class="nav-item"><a class="nav-link text-dark" href="/cardapio-dia/">Cardápio do Dia</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/refeicoes/">Refeições</a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link text-dark" href="/avaliacoes/">Avaliações</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/sugestoes/">Sugestões</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/avisos/">Avisos</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/admin/">Admin</a></li>
             </ul>
         </div>
     </nav>
+
     <div class="container mt-5">
-        <div class="jumbotron text-center">
-            <h1 class="display-4">Olá, é bom te ver por aqui</h1>
-            <p class="lead">Esta é a página inicial do Prato do Dia</p>
-            <p class="lead">Seja Bem Vindo(A) ao Cardápio Digital do Refeitório</p>
-        </div>
+        <h1 class="mb-4">Prato do Dia</h1>
+        <p class="lead">Refeitório do IFSULDEMINAS - Campus Muzambinho</p>
+
+        <h2 class="mt-5 mb-3">Cardápio de Hoje</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Data</th>
+                    <th scope="col">Almoço</th>
+                    <th scope="col">Jantar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cardapio in cardapios_dia %}
+                <tr>
+                    <td>{{ cardapio.data }}</td>
+                    <td>{{ cardapio.refeicaoAlmoco }}</td>
+                    <td>{{ cardapio.refeicaoJantar }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Nenhum cardápio cadastrado para hoje.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="mt-5 mb-3">Avisos</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">Mensagem</th>
+                    <th scope="col">Data de Expiração</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for aviso in avisos %}
+                <tr>
+                    <td>{{ aviso.titulo }}</td>
+                    <td>{{ aviso.mensagem }}</td>
+                    <td>{{ aviso.dataExpiracao }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Nenhum aviso no momento.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-    <!-- Incluindo jQuery e Bootstrap JS -->
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

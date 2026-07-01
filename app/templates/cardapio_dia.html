@@ -8,56 +8,106 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-        <a class="navbar-brand" href="/">Prato do Dia</a>
+        <a class="navbar-brand" href="/home/">Prato do Dia</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/cardapio-dia/">Cardápio do Dia</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/cardapio-semanal/">Cardápio Semanal</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/refeicoes/">Refeições</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/avaliacoes/">Avaliações</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/sugestoes/">Sugestões</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/avisos/">Avisos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/admin/">Administração</a>
-                </li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/home/">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/cardapio-dia/">Cardápio do Dia</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/refeicoes/">Refeições</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/avaliacoes/">Avaliações</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/sugestoes/">Sugestões</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/avisos/">Avisos</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/admin/">Admin</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container mt-5">
         <h2 class="mb-4">Cardápio do Dia</h2>
-        <table class="table">
+
+        <h4>Adicionar Cardápio do Dia</h4>
+        <form method="post" class="mb-5">
+            {% csrf_token %}
+            <input type="hidden" name="acao" value="adicionar">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label>Data</label>
+                    <input type="date" name="data" class="form-control" required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Almoço</label>
+                    <select name="refeicaoAlmoco" class="form-control" required>
+                        <option value="">Selecione</option>
+                        {% for refeicao in refeicoes %}
+                        <option value="{{ refeicao.id }}">{{ refeicao.diaSemana.nome }} - {{ refeicao.tipoRefeicao.nome }}: {{ refeicao.pratoPrincipal }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Jantar</label>
+                    <select name="refeicaoJantar" class="form-control" required>
+                        <option value="">Selecione</option>
+                        {% for refeicao in refeicoes %}
+                        <option value="{{ refeicao.id }}">{{ refeicao.diaSemana.nome }} - {{ refeicao.tipoRefeicao.nome }}: {{ refeicao.pratoPrincipal }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>&nbsp;</label>
+                    <button type="submit" class="btn btn-success form-control">Salvar</button>
+                </div>
+            </div>
+        </form>
+
+        <h4>Cardápios Cadastrados</h4>
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Data</th>
-                    <th scope="col">Almoço</th>
-                    <th scope="col">Jantar</th>
+                    <th>Data</th>
+                    <th>Almoço</th>
+                    <th>Jantar</th>
+                    <th colspan="2">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 {% for cardapio in cardapios %}
                 <tr>
-                    <td>{{ cardapio.data }}</td>
-                    <td>{{ cardapio.refeicaoAlmoco }}</td>
-                    <td>{{ cardapio.refeicaoJantar }}</td>
+                    <form method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ cardapio.id }}">
+                        <input type="hidden" name="acao" value="editar">
+                        <td><input type="date" name="data" value="{{ cardapio.data|date:'Y-m-d' }}" class="form-control form-control-sm"></td>
+                        <td>
+                            <select name="refeicaoAlmoco" class="form-control form-control-sm">
+                                {% for refeicao in refeicoes %}
+                                <option value="{{ refeicao.id }}" {% if refeicao.id == cardapio.refeicaoAlmoco.id %}selected{% endif %}>{{ refeicao.diaSemana.nome }} - {{ refeicao.tipoRefeicao.nome }}: {{ refeicao.pratoPrincipal }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <select name="refeicaoJantar" class="form-control form-control-sm">
+                                {% for refeicao in refeicoes %}
+                                <option value="{{ refeicao.id }}" {% if refeicao.id == cardapio.refeicaoJantar.id %}selected{% endif %}>{{ refeicao.diaSemana.nome }} - {{ refeicao.tipoRefeicao.nome }}: {{ refeicao.pratoPrincipal }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td><button type="submit" class="btn btn-warning btn-sm">Editar</button></td>
+                    </form>
+                    <td>
+                        <form method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ cardapio.id }}">
+                            <input type="hidden" name="acao" value="excluir">
+                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Nenhum cardápio diário cadastrado.</td>
                 </tr>
                 {% endfor %}
             </tbody>
